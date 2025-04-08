@@ -7,6 +7,7 @@ app.use(express.json());
 
 // In-memory count
 let count = 0;
+let wcount = 0;
 
 // Hardcoded username and password
 const USERNAME = 'admin';
@@ -35,11 +36,19 @@ function authenticate(req, res, next) {
 app.get('/count', (req, res) => {
     res.json({ count });
 });
+app.get('/wcount', (req, res) => {
+    res.json({wcount});
+})
 
 app.post('/count', authenticate, (req, res) => {
     count++;
     res.json({ message: 'Count incremented', count });
 });
+
+app.post('/wcount', (req, res) => {
+    wcount++;
+    res.json({ message: 'wCount incremented', wcount });
+})
 
 // Start server
 app.listen(PORT, () => {
